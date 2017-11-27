@@ -1,0 +1,1214 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*===========================================================================*/
+
+div[class*='col-'], section[class*='col-'], article[class*='col-'], span[class*='col-']{float: left;}
+
+.col-d-1     {width: 8.33%;}
+.col-d-2     {width: 16.66%;} 
+.col-d-3     {width: 25%;}
+.col-d-4     {width: 33.33%;}
+.col-d-5     {width: 41.66%;}
+.col-d-6     {width: 50%;}
+.col-d-7     {width: 58.33%;}
+.col-d-8     {width: 66.66%;}
+.col-d-9     {width: 75%;}
+.col-d-10    {width: 83.33%;}
+.col-d-11    {width: 91.66%;}
+.col-d-12    {width: 100%;}
+
+.small {height: 1px;}
+.medium {height: 100px;}
+.large {height: 500px;}
+
+
+
+/*
+  (TEXT) PARAMS
+  =================
+  1. Namespace
+  2. Intensity
+  3. Text color
+  4. Background color (flat)
+  5. Highlight #1 color
+  6. Highlight #2 color
+  7. Width (px)
+  8. Height (px)
+*/
+
+/*===========================================================================*/
+
+@mixin textGlitch($name, $intensity, $textColor, $background, $highlightColor1, $highlightColor2, $width, $height) {
+  
+  color: $textColor;
+  position: relative;
+  $steps: $intensity;
+  
+  // Ensure the @keyframes are generated at the root level
+  @at-root {
+    // We need two different ones
+    @for $i from 1 through 2 {
+      @keyframes #{$name}-anim-#{$i} {
+        @for $i from 0 through $steps {
+          #{percentage($i*(1/$steps))} {
+            clip: rect(
+              random($height)+px,
+              $width+px,
+              random($height)+px,
+              0
+            );
+          }
+        }
+      }
+    }
+  }
+  &:before,
+  &:after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: $background;
+    clip: rect(0, 0, 0, 0); 
+  }
+  &:after {
+    left: -2px;
+    top: 2px;
+    text-shadow: -1px 0 $highlightColor1;
+    animation: #{$name}-anim-1 2s infinite linear alternate-reverse;
+  }
+  &:before {
+    left: -2px;
+    top: -2px;
+    text-shadow: 3px 0 $highlightColor2; 
+    animation: #{$name}-anim-2 3s infinite linear alternate-reverse;
+  }
+  
+}
+
+/*===========================================================================*/
+
+$color-1: #9eecf6;
+$color-2: #678aef;
+$color-3: #eaeafc;
+$color-5: #0600c5;
+$color-6: #fff500;
+
+$grey-1: #e1e1e1;
+$grey-2: #a8a8a8;
+$grey-3: #676767;
+$grey-4: #2c2c2c;
+
+$body-font: 'Open Sans', sans-serif;
+$accent-font: 'Raleway', sans-serif;
+
+
+/*===========================================================================*/
+
+
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: inline-block;
+}
+
+.container {
+    width: 1366px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.clearfix::after {
+    pointer-events: none;
+    z-index: -20;
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.horizontal {
+    height: 2px;
+    background-color: $grey-1;
+    margin: 30px 0;
+}
+
+.mobile-only {
+    display: none;
+}
+
+.tablet-only {
+    display: none;
+}
+
+body {
+    font-family: $body-font;
+    font-weight: 300;
+    color: $grey-4;
+    height: 5000px;
+}
+
+//================================ HEADER
+
+h1 {
+    text-align: center;
+    display: inline-block;
+    font-family: $accent-font;
+    font-weight: 900;
+    font-size: 90px;
+    letter-spacing: 20px;
+    color: $color-6;
+    mix-blend-mode: exclusion;
+    border-bottom: 10px solid $color-6;
+}
+
+h2 {
+    font-family: $body-font;
+    font-size: 1.6vw;
+    font-weight: 600;
+    color: $color-6;
+    mix-blend-mode: exclusion;
+    width: 80%;
+    margin: 0 auto;
+    line-height: 2em;
+}
+
+
+h3 {
+    display: inline;
+    font-family: $body-font;
+    font-weight: 300;
+    font-size: 20px;
+    padding-left: 50px;
+    color: $color-5;
+}
+
+h4 {
+    font-family: $accent-font;
+    font-weight: 400;
+    letter-spacing: 7px;
+    font-size: 50px;
+    padding: 30px;
+}
+
+h5 {
+    text-align: center;
+    font-family: $accent-font;
+    font-weight: 200;
+    letter-spacing: 10px;
+    font-size: 80px;
+    padding: 30px;
+}
+
+h6 {
+    text-align: center;
+    display: inline-block;
+    font-family: $accent-font;
+    font-weight: 900;
+    font-size: 4.5vw;
+    letter-spacing: 20px;
+    color: $color-2;
+    border-bottom: 10px solid $color-2;
+}
+
+header {
+    background-image: url('../img/cube.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+}
+
+.header-img {
+    height: 80px;
+    width: auto;
+    margin: 50px;
+}
+
+nav {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    padding: 50px;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    display: inline;
+}
+
+li a {
+    text-decoration: none;
+    color: black;
+    :hover {
+        color: $color-6;
+        mix-blend-mode: exclusion;
+    }
+}
+
+.header-quote {
+    margin-top: 70px;
+    text-align: center;
+}
+
+.header-subtitle {
+    text-align: center;
+    margin: 100px auto 0 auto;
+}
+
+.header-down {
+    text-align: center;
+    mix-blend-mode: exclusion;
+}
+
+#second-down {
+    margin: 40px 0;
+}
+
+
+
+//================================ WORK
+
+.work {
+    height: 100vh;
+    margin-top: 100px;
+}
+
+.work-article {
+    text-align: center;
+    margin-top: 40px;
+    p {
+        padding-bottom: 30px;
+    }
+}
+
+.work-img {
+    padding: 20px;
+    width: 50%;
+    border: 5px solid $grey-4;
+    border-radius: 50%;
+}
+
+#fullquote {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 2em;
+    span {
+        font-weight: 800;
+    }
+}
+
+#quoteby {
+    font-size: 10px;
+}
+
+.downarrow {
+    display: inline-block;
+    width: 50px;
+    border-radius: 50%;
+    margin: 40px auto;
+}
+
+//================================ WEB
+
+.web {
+    padding-top: 40px;
+    min-height: 100vh;
+    max-height: inherit;
+
+    h1 {
+        width: 100%;
+        color: $grey-4;
+        font-size: 60px;
+        border: none;
+    }
+    h5 {
+        font-size: 20px;
+    }
+}
+
+.web-article {
+    text-align: center;
+    margin-top: 30px;
+    p {
+        padding: 0 20px 20px 20px;
+        line-height: 1.5em;
+        text-align: justify;
+    }
+}
+
+.morebttn {
+    border-radius: 5px;
+    background-color: $color-2;
+    width: 70px;
+    margin: 40px auto;
+    padding: 10px;
+}
+
+
+.morebttn:hover {
+    background-color: $grey-3;
+    cursor: pointer;
+}
+
+
+
+.web-img {
+    width: 90%;
+}
+
+a {
+    text-decoration: none;
+    color: $grey-4;
+}
+
+.livebttn {
+    background-color: $grey-1;
+    width: 60%;
+    margin: 40px auto;
+    padding: 10px;
+
+}
+
+
+//================================ AUDVIS
+
+
+.audvis {
+    background-color: $grey-4;
+    min-height: 100vh;
+    
+    p {
+        color: $grey-1;
+        padding: 5px 0 20px 0;
+        font-size: 14px;
+    }
+    .container {
+        margin-top: 80px;
+    }    
+    h1 {
+        line-height: 1.5em;
+        display: inline-block;
+        padding-bottom: 20px;
+        width: 100%;
+        color: $color-2;
+        font-size: 60px;
+        border-bottom: 2px dashed $grey-1;
+        margin-bottom: 30px;
+    }
+    h2 {
+        margin: 0;
+        text-align: left;
+        font-size: 20px;
+        color: $color-6;
+        padding: 0;
+    }
+    .audio-holder, .video-holder {
+        width: 80%;
+        margin: 40px auto 0 auto;
+    }
+    iframe {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+
+
+//================================ GAME
+
+
+.game {
+    margin-top: 30px;
+    margin-bottom: 100px;
+     h1 {
+        width: 100%;
+        color: $grey-4;
+        font-size: 60px;
+        border: none;
+        margin-bottom: 55px;
+    }
+    h5 {
+        font-size: 20px;
+    }
+    p {
+        font-size: 16px;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+}
+
+.game-article {
+    position: relative;
+    text-align: center;    
+}
+
+.ss-holder {
+    z-index: 5;
+    width: 80%;
+    height: auto;
+    margin: 40px auto;
+}
+
+.ss-holder:hover {
+    cursor: crosshair;
+}
+
+.game-img {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.game-info {
+    text-align: left;
+    z-index: 10;
+    height: 82%;
+    width: 80%;
+    background-color: black;
+    position: absolute;
+    top: 9.5%;
+    left: 10%;
+    opacity: 0;
+    transition: .5s all ease;
+    
+    h6 {
+        margin: 20px;
+        font-weight: 600;
+        font-size: 40px;
+        text-align: left;
+        border-bottom-width: 5px;
+    }
+    p {
+        text-align: left;
+        color: white;
+        line-height: 1.5em;
+        padding: 20px 0;
+        margin-left: 20px;
+    }
+}
+
+.game-info:hover {
+    opacity: 0.8;
+    transition: .5s all ease;
+}
+
+.glitch {
+    text-align: center;
+    display: block;
+    font-family: $accent-font;
+    font-weight: 900;
+    letter-spacing: 20px;
+    color: $grey-4;
+    font-size: 60px;
+    border: none;
+    width: 80%;
+    margin: 40px auto;
+    @include textGlitch("example-one", 4, $grey-4, white, $grey-2, $color-2, 900, 80);
+}
+
+
+//================================ FOOTER
+
+footer {
+    background-color: $grey-1;
+    text-align: center;
+    img {
+        width: 50px;
+    }
+    small {
+        display: block;
+        font-size: 10px;
+        padding-bottom: 15px;
+    }
+    a {
+        color: $color-2;
+    }
+    a:hover {
+        color: $grey-4;
+        cursor: pointer;
+    }
+    h4 {
+        font-size: 20px;
+        display: inline-block;
+        letter-spacing: 0;
+        padding: 20px;
+    }
+    
+    .footer-icons {
+        padding-bottom: 20px;
+    }
+}
+
+
+//================================= ABOUT PAGE
+
+#about {
+    body {
+        height: auto;
+    }
+    header {
+        background-image: none;
+        height: auto;
+    }
+    nav ul li a h3 {
+        color: $grey-4;
+    }
+    nav ul li a h3:hover {
+        color: $color-2;
+    }
+    .intro,
+    .qualifications,
+    .skills {
+        margin: 0 auto;
+        text-align: justify;
+        line-height: 2em;
+        p {
+            padding: 20px;
+        }
+        h2 {
+            font-family: $accent-font;
+            font-size: 40px;
+            letter-spacing: 7px;
+            padding: 20px;
+            text-align: center;
+            color: $grey-4;
+        }
+    }
+    
+    .portrait {
+        display: block;
+        width: 350px;
+        height: auto;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+    
+    
+
+    .skills {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .skill-img {
+        height: 150px;
+        width: 150px;
+        filter: grayscale(1);
+    }
+
+    .skills {
+        p {
+            text-align: justify;
+            padding: 40px;
+        }
+    }
+
+    .contact-prompt {
+        font-weight: 600;
+        letter-spacing: 5px;
+        height: auto;
+        text-align: center;
+        font-size: 40px;
+        margin: 30px 0 100px 0;
+        span {
+            padding: 20px;
+            border: 3px solid $grey-3;
+        }
+        a {
+            text-decoration: none;
+            color: $grey-3;
+            :hover {
+                color: $color-2;
+            }
+        }
+    }
+
+    .contact-prompt span:hover {
+        color: $color-2;
+        border-color: $color-2;
+    }
+
+    footer {
+        background-color: $grey-1;
+        margin-top: 60px;
+    }
+
+} //end about
+
+//================================ CONTACT PAGE
+
+#contact {
+    body {
+        height: auto;
+    }
+    height: 100%;
+    .contact {
+        border: 2px solid $grey-4;
+        padding: 30px;
+        margin-bottom: 100px;
+    }
+    header {
+        background-image: none;
+        height: auto;
+    }
+    nav ul li a h3 {
+        color: $grey-4;
+    }
+    nav ul li a h3:hover {
+        color: $color-2;
+    }
+
+    h5 {
+        font-size: 40px;
+        text-align: center;
+        font-family: $accent-font;
+        font-weight: 600;
+        letter-spacing: 5px;
+    }
+
+    article {
+        text-align: center;
+        margin-top: 20px;
+        height: 100%;
+    }
+
+    p {
+        text-align: left;
+        margin-left: 9%;
+        font-size: 18px;
+    }
+
+    form {
+
+        input {
+            border: 2px solid $grey-4;
+            padding: 5px;
+            width: 80%;
+            margin: 20px 0;
+        }
+
+        input:focus {
+            border-color: $color-2;
+        }
+
+        #subbtn {
+            border: 2px solid transparent;
+            border-radius: 6px;
+            width: 23%;
+            padding: 5px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-family: $body-font;
+            color: white;
+            size: 18px;
+            background-color: $color-2;
+        }
+        #subbtn:hover {
+            border: 2px solid $grey-4;
+        }
+    }
+    textarea {
+        border: 2px solid $grey-4;
+        padding: 5px;
+        width: 80%;
+        height: 190px;
+        margin: 20px 0;
+    }
+
+    textarea:focus {
+        border-color: $color-2;
+    }
+    .follow-img {
+        width: 60px;
+        padding: 30px 20px 10px 20px;
+    }
+
+    .find {
+        text-align: center;
+        p {
+            text-align: center;
+            padding: 5px;
+            margin: 60px auto;
+            border: 2px solid $color-2;
+            width: 80%;
+        }
+        p:hover {
+            border-color: $color-1;
+        }
+    }
+
+} //end contact
+
+
+/*===================================QUERIES========================================*/
+
+@media screen and (max-width: 1367px) and (min-width: 320px) {
+
+div[class*='col-'], section[class*='col-'], article[class*='col-']{float: left;}
+
+    .container {
+        width: 90%;
+    }
+    
+    .work-img {
+        margin: 30px;
+    }
+    
+    .work h4 {
+        font-size: 38px;
+        padding: 20px 0;
+    }
+    
+    .work article {
+        margin-top: 0;
+    }
+    
+    .web {
+        h5 {
+            letter-spacing: 3px;
+        }
+    }
+    
+} //end CONTAINER query ==========================================================
+
+@media screen and (max-width: 1024px) and (min-width: 740px) {
+
+    div[class*='col-'], section[class*='col-'], article[class*='col-']{float: left;}
+
+    .col-t-1     {width: 8.33%;}
+    .col-t-2     {width: 16.66%;} 
+    .col-t-3     {width: 25%;}
+    .col-t-4     {width: 33.33%;}
+    .col-t-5     {width: 41.66%;}
+    .col-t-6     {width: 50%;}
+    .col-t-7     {width: 58.33%;}
+    .col-t-8     {width: 66.66%;}
+    .col-t-9     {width: 75%;}
+    .col-t-10    {width: 83.33%;}
+    .col-t-11    {width: 91.66%;}
+    .col-t-12    {width: 100%;}
+    
+    .tablet-only {
+        display: block;
+    }
+        
+    #index header {
+        min-height: 720px;
+    }
+    
+    header{        
+        #header-logo {
+            width: 60px;
+        }
+        
+        h1 {
+            font-size: 70px;
+            letter-spacing: 7px;
+        }
+        
+        h2 {
+            font-size: 26px;
+            margin-top: 0;
+        }
+    }
+    
+    nav ul li a h3 {
+         font-size: 18px;
+    }
+    
+    .work-img {
+        padding: 10px;
+        width: 50%;
+        border-width: 2px;
+    }
+    
+    .work h4 {
+        font-size: 20px;
+        padding: 20px 0;
+    }
+    
+    .glitch {
+    letter-spacing: 10px;
+    font-size: 60px;
+    border: none;
+    width: 80%;
+    margin: 40px auto;
+    }
+    
+    .web {
+        h5 {
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+    }
+    
+    #about {
+        .intro, .qualifications, .skills {
+            h2 {
+                padding: 0;
+                font-size: 25px;
+                letter-spacing: 5px;
+                }
+        }
+    }
+    
+    //================================ CONTACT PAGE
+
+    #contact {
+        h5 {
+            font-size: 35px;
+            letter-spacing: 4px;
+        }
+
+        p {
+            text-align: left;
+            margin-left: 9%;
+            font-size: 16px;
+        }
+
+        #subbtn {
+            width: 28%;
+        }
+
+    } //end contact
+    
+} //end TABLET query ==========================================================
+
+
+@media screen and (max-width: 739px) and (min-width: 320px) {
+
+    div[class*='col-'], section[class*='col-'], article[class*='col-']{float: left;}
+
+    .col-m-1     {width: 8.33%;}
+    .col-m-2     {width: 16.66%;} 
+    .col-m-3     {width: 25%;}
+    .col-m-4     {width: 33.33%;}
+    .col-m-5     {width: 41.66%;}
+    .col-m-6     {width: 50%;}
+    .col-m-7     {width: 58.33%;}
+    .col-m-8     {width: 66.66%;}
+    .col-m-9     {width: 75%;}
+    .col-m-10    {width: 83.33%;}
+    .col-m-11    {width: 91.66%;}
+    .col-m-12    {width: 100%;}
+    
+    .mobile-only {
+        display: inline-block;
+    }
+    
+    .tablet-only {
+        display: none;
+    }
+    
+    header {
+        background-image: url('../img/cube-smaller.gif');
+        background-size: auto 100%;
+        
+        h1 {
+            font-size: 48px;
+            line-height: 1.5em;
+        }
+        h2 {
+            font-size: 20px;
+        }
+    }
+    
+    #header-logo {
+        width: 60px;
+        padding: 0;
+        margin: 30px;
+    }
+    
+    nav {
+        padding: 30px;
+    }
+    
+    .work {
+        min-height: 100vh;
+        display: block;
+        height: auto;
+    }
+    
+    .work-img {
+        width: 30%;
+        margin: 30px;
+    }
+    
+    .work h4 {
+        font-size: 38px;
+        padding: 40px 0 0 0;
+    }
+    
+    .work article {
+        margin-top: 0;
+    }
+    
+    .web {
+        h5 {
+            letter-spacing: 3px;
+        }
+    }
+    
+    .audvis {
+        h1 {
+            font-size: 40px;
+        }
+    }
+    
+    #about {
+        header {
+            height: 100px;
+        }
+        .portrait {
+            width: 200px;
+        }
+        .intro, .qualifications, .skills {
+            h2 {
+                padding: 0px;
+                font-size: 30px;
+                letter-spacing: 2px;
+                margin-top: 20px;
+            }
+        }
+        nav ul li a h3 {
+            font-size: 16px;
+        }
+    } //end about
+    
+    #contact {
+        header {
+            height: 100px;
+        }
+        nav ul li a h3 {
+            font-size: 16px;
+        }
+        h5 {
+            font-size: 35px;
+            letter-spacing: 4px;
+        }
+
+        p {
+            text-align: left;
+            margin-left: 9%;
+            font-size: 16px;
+        }
+
+        #subbtn {
+            width: 28%;
+
+        }
+        .find {
+            span {
+                p {
+                    margin: 15px auto;
+                    padding: 10px;
+                }
+            }
+        }
+    } //end contact
+    
+} //end MOBILE query ==========================================================
+
+
+@media screen and (max-width: 500px) and (min-width: 320px) {
+
+    div[class*='col-'], section[class*='col-'], article[class*='col-']{float: left;}
+
+    .col-m-1     {width: 8.33%;}
+    .col-m-2     {width: 16.66%;} 
+    .col-m-3     {width: 25%;}
+    .col-m-4     {width: 33.33%;}
+    .col-m-5     {width: 41.66%;}
+    .col-m-6     {width: 50%;}
+    .col-m-7     {width: 58.33%;}
+    .col-m-8     {width: 66.66%;}
+    .col-m-9     {width: 75%;}
+    .col-m-10    {width: 83.33%;}
+    .col-m-11    {width: 91.66%;}
+    .col-m-12    {width: 100%;}
+    
+    header {
+        background-image: none;
+        background-color: $color-2;
+        margin-bottom: 20px;
+        h1 {
+        margin: 0 auto;
+        font-size: 40px;
+        color: white;
+        border-bottom: 3px solid white;
+        mix-blend-mode: normal;
+        }
+        h2 {
+        margin: 0 auto;
+        font-size: 20px;
+        color: $color-5;
+        mix-blend-mode: normal;    
+        }
+        #h-downarrow {
+            mix-blend-mode: normal;
+        }
+    }
+    
+    .header-quote, .header-subtitle {
+        margin-top: 50px;
+    }
+    
+    #header-logo {
+        width: 60px;
+        height: auto;
+        padding: 20px;
+        margin: 0;
+    }
+    
+    nav {
+            padding: 10px;
+        }
+        nav ul li a h3 {
+            font-size: 16px;
+            padding: 10px;
+            margin: 0;
+        }
+    
+    .glitch {
+        font-size: 40px;
+    }
+    
+    .work {
+        
+        margin-top: 30px;
+        min-height: 100vh;
+        display: inline-block;
+        
+        h4 {
+            font-size: 20px;
+            margin-top: 0;
+        }
+    }
+    
+    .work-article {
+        margin-top: 0;
+    }
+    
+    #about {
+                header {
+            height: 100px;
+        }
+        .portrait {
+            width: 200px;
+        }
+        .intro, .qualifications, .skills {
+            h2 {
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+        }
+        span {
+            font-size: 20px;
+        }
+    } //end about
+    
+    #contact {
+        header {
+            height: 100px;
+        }
+        
+        h5 {
+            font-size: 35px;
+            letter-spacing: 4px;
+        }
+
+        p {
+            text-align: left;
+            margin-left: 9%;
+            font-size: 12px;
+        }
+
+        #subbtn {
+            width: 28%;
+
+        }
+        .find {
+            span {
+                p {
+                    margin: 15px auto;
+                    padding: 10px;
+                }
+            }
+        }
+    } //end contact
+    
+} //end SMALLEST MOBILE query ==============================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
