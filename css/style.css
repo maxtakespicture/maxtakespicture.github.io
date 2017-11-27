@@ -141,8 +141,7 @@ div[class*='col-'], section[class*='col-'], article[class*='col-'], span[class*=
 body {
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
-  color: #2c2c2c;
-  height: 5000px; }
+  color: #2c2c2c; }
 
 h1 {
   text-align: center;
@@ -434,51 +433,51 @@ a {
 
 @-webkit-keyframes example-one-anim-1 {
   0% {
-    clip: rect(5px, 900px, 75px, 0); }
+    clip: rect(47px, 900px, 24px, 0); }
   25% {
-    clip: rect(36px, 900px, 43px, 0); }
+    clip: rect(33px, 900px, 5px, 0); }
   50% {
-    clip: rect(19px, 900px, 34px, 0); }
+    clip: rect(3px, 900px, 70px, 0); }
   75% {
-    clip: rect(43px, 900px, 27px, 0); }
+    clip: rect(52px, 900px, 19px, 0); }
   100% {
-    clip: rect(11px, 900px, 19px, 0); } }
+    clip: rect(3px, 900px, 61px, 0); } }
 
 @keyframes example-one-anim-1 {
   0% {
-    clip: rect(5px, 900px, 75px, 0); }
+    clip: rect(47px, 900px, 24px, 0); }
   25% {
-    clip: rect(36px, 900px, 43px, 0); }
+    clip: rect(33px, 900px, 5px, 0); }
   50% {
-    clip: rect(19px, 900px, 34px, 0); }
+    clip: rect(3px, 900px, 70px, 0); }
   75% {
-    clip: rect(43px, 900px, 27px, 0); }
+    clip: rect(52px, 900px, 19px, 0); }
   100% {
-    clip: rect(11px, 900px, 19px, 0); } }
+    clip: rect(3px, 900px, 61px, 0); } }
 
 @-webkit-keyframes example-one-anim-2 {
   0% {
-    clip: rect(3px, 900px, 29px, 0); }
+    clip: rect(17px, 900px, 54px, 0); }
   25% {
-    clip: rect(60px, 900px, 41px, 0); }
+    clip: rect(63px, 900px, 4px, 0); }
   50% {
-    clip: rect(38px, 900px, 13px, 0); }
+    clip: rect(7px, 900px, 78px, 0); }
   75% {
-    clip: rect(79px, 900px, 55px, 0); }
+    clip: rect(10px, 900px, 2px, 0); }
   100% {
-    clip: rect(72px, 900px, 40px, 0); } }
+    clip: rect(9px, 900px, 13px, 0); } }
 
 @keyframes example-one-anim-2 {
   0% {
-    clip: rect(3px, 900px, 29px, 0); }
+    clip: rect(17px, 900px, 54px, 0); }
   25% {
-    clip: rect(60px, 900px, 41px, 0); }
+    clip: rect(63px, 900px, 4px, 0); }
   50% {
-    clip: rect(38px, 900px, 13px, 0); }
+    clip: rect(7px, 900px, 78px, 0); }
   75% {
-    clip: rect(79px, 900px, 55px, 0); }
+    clip: rect(10px, 900px, 2px, 0); }
   100% {
-    clip: rect(72px, 900px, 40px, 0); } }
+    clip: rect(9px, 900px, 13px, 0); } }
   .glitch:before, .glitch:after {
     content: attr(data-text);
     position: absolute;
